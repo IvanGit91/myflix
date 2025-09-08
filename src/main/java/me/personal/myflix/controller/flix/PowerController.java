@@ -1,0 +1,20 @@
+package me.personal.myflix.controller.flix;
+
+import me.personal.myflix.controller.base.BaseController;
+import me.personal.myflix.entity.flix.Power;
+import me.personal.myflix.service.flix.PowerService;
+import me.personal.myflix.service.base.BaseService;
+import org.springframework.web.bind.annotation.*;
+
+@CrossOrigin
+@RestController
+@RequestMapping("/power")
+public class PowerController extends BaseController<Power, Long> {
+
+    private final PowerService powerService;
+
+    public PowerController(BaseService<Power, Long> baseService, PowerService powerService) {
+        super(baseService);
+        this.powerService = powerService;
+    }
+}
