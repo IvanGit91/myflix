@@ -15,6 +15,7 @@ public class BaseMainConfiguration {
 	}
 
 	// Solve the lazy loading problem
+    // TODO - to remove, can lead to the n+1 query problem
 	@Bean
 	public FilterRegistrationBean<OpenEntityManagerInViewFilter> registerOpenEntityManagerInViewFilterBean() {
 		FilterRegistrationBean<OpenEntityManagerInViewFilter> registrationBean = new FilterRegistrationBean<>();

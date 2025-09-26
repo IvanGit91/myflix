@@ -196,8 +196,8 @@ public abstract class BaseServiceImpl<T extends BaseEntity<ID>, ID extends Seria
                             if (mappedBy.isEmpty() && !fieldsMappedBy.isEmpty()) {
                                 mappedBy = fieldsMappedBy.get(0).getName();
                             }
-							if (!mappedBy.isEmpty() && !nextEntity.getClass().equals(entity.getClass()) && (prevMappedBy == null || !prevMappedBy.equals(fieldName))) { // Se ha la ricorsione, non controllare gli elementi altrimenti va in loop
-								idBack = saveUpdateListsMultiRecursive(nextEntity, mappedBy); //Do recursion and check field by field
+							if (!mappedBy.isEmpty() && !nextEntity.getClass().equals(entity.getClass()) && (prevMappedBy == null || !prevMappedBy.equals(fieldName))) { // If it has recursion, don't check elements otherwise it goes in loop
+                                idBack = saveUpdateListsMultiRecursive(nextEntity, mappedBy); //Do recursion and check field by field
 							}
 						} else {
 							entityList.remove(i--);
