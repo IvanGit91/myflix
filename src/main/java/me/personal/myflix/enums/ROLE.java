@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import me.personal.myflix.annotation.EnumExposedViaRest;
 
-@EnumExposedViaRest(enumApiName = "characterTypology", multilanguageDescription = false)
+@EnumExposedViaRest(enumApiName = "mediaType", multilanguageDescription = false)
 @Getter
 @AllArgsConstructor
-public enum CHARACTER_TYPOLOGY {
-    GOOD,
-    BAD,
-    MIXED
+public enum ROLE {
+    ROLE_MANAGER,
+    ROLE_CUSTOMER,
+    ROLE_EMPLOYEE
 }

@@ -8,5 +8,6 @@ import java.util.Collection;
 
 public interface UserService extends BaseService<User, Long> {
     User findOne(String email);
+
     Collection<User> findByRole(String role);
 }

@@ -1,9 +1,9 @@
 package me.personal.myflix.service.flix.impl;
 
-import me.personal.myflix.entity.flix.Media;
 import me.personal.myflix.entity.flix.Character;
-import me.personal.myflix.repository.flix.MediaRepository;
+import me.personal.myflix.entity.flix.Media;
 import me.personal.myflix.repository.base.BaseRepository;
+import me.personal.myflix.repository.flix.MediaRepository;
 import me.personal.myflix.service.base.impl.BaseServiceImpl;
 import me.personal.myflix.service.flix.MediaService;
 import org.springframework.stereotype.Service;

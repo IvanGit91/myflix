@@ -1,8 +1,8 @@
 package me.personal.myflix.service.flix.impl;
 
 import me.personal.myflix.entity.flix.Power;
-import me.personal.myflix.repository.flix.PowerRepository;
 import me.personal.myflix.repository.base.BaseRepository;
+import me.personal.myflix.repository.flix.PowerRepository;
 import me.personal.myflix.service.base.impl.BaseServiceImpl;
 import me.personal.myflix.service.flix.PowerService;
 import org.springframework.stereotype.Service;

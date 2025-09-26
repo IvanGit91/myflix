@@ -9,8 +9,8 @@ import me.personal.myflix.annotation.EnumExposedViaRest;
 @Getter
 @AllArgsConstructor
 public enum MEDIA_TYPE {
-	MOVIE,
-	SERIE,
+    MOVIE,
+    SERIES,
     ANIME,
     DOCUMENTARY
 }

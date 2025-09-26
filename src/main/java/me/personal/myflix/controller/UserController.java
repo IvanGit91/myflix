@@ -1,11 +1,11 @@
 package me.personal.myflix.controller;
 
 import lombok.RequiredArgsConstructor;
-import me.personal.myflix.security.jwt.JwtProvider;
-import me.personal.myflix.payload.response.JwtResponse;
 import me.personal.myflix.entity.User;
-import me.personal.myflix.service.UserService;
 import me.personal.myflix.payload.request.LoginForm;
+import me.personal.myflix.payload.response.JwtResponse;
+import me.personal.myflix.security.jwt.JwtProvider;
+import me.personal.myflix.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,7 +32,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody LoginForm loginForm) {
-        // throws Exception if authentication failed
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginForm.getUsername(), loginForm.getPassword()));
@@ -41,7 +40,7 @@ public class UserController {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             User user = userService.findOne(userDetails.getUsername());
             return ResponseEntity.ok(new JwtResponse(jwt, user.getEmail(), user.getName(), user.getRole()));
-        } catch (AuthenticationException e) {
+        } catch (AuthenticationException _) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
@@ -51,7 +50,7 @@ public class UserController {
     public ResponseEntity<User> save(@RequestBody User user) {
         try {
             return ResponseEntity.ok(userService.save(user));
-        } catch (Exception e) {
+        } catch (Exception _) {
             return ResponseEntity.badRequest().build();
         }
     }
@@ -61,7 +60,7 @@ public class UserController {
         try {
             if (!principal.getName().equals(user.getEmail())) throw new IllegalArgumentException();
             return ResponseEntity.ok(userService.update(user));
-        } catch (Exception e) {
+        } catch (Exception _) {
             return ResponseEntity.badRequest().build();
         }
     }

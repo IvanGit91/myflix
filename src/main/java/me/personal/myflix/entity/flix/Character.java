@@ -2,14 +2,13 @@ package me.personal.myflix.entity.flix;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import me.personal.myflix.annotation.Recursive;
 import me.personal.myflix.entity.base.BaseOriginalEntity;
-
-import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -35,13 +34,14 @@ public class Character extends BaseOriginalEntity<Character, Long> implements Se
     private String typology;
 
     @ManyToOne
-    @JoinColumn(name="media_id", foreignKey=@ForeignKey(name = "FK_characters_TO_media"))
+    @JoinColumn(name = "media_id", foreignKey = @ForeignKey(name = "FK_characters_TO_media"))
     @JsonIgnoreProperties("characters") // Solve the infinite loop in the json
     private Media media;
 
     @ManyToOne
-    @JoinColumn(name="character_id", foreignKey=@ForeignKey(name = "FK_characters_TO_character"))
-    @JsonIgnoreProperties({"character","linkedCharacters","powers","objectives"}) // Solve the infinite loop in the json
+    @JoinColumn(name = "character_id", foreignKey = @ForeignKey(name = "FK_characters_TO_character"))
+    @JsonIgnoreProperties({"character", "linkedCharacters", "powers", "objectives"})
+    // Solve the infinite loop in the json
     private Character parentCharacter;
 
     @OneToMany(mappedBy = "parentCharacter", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

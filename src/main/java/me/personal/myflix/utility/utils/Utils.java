@@ -5,12 +5,12 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class Utils {
-    private Utils() {
-        throw new IllegalStateException("Utility class");
-    }
     public static final String CUSTOM_FORMAT_STRING = "yyyy-MM-dd HH:mm:ss";
     public static final DateTimeFormatter EUROPEAN_DATE_FORMATTER = DateTimeFormatter.ofPattern(CUSTOM_FORMAT_STRING);
     public static final ZoneId ZONE_ROME = ZoneId.of("Europe/Rome");
+    private Utils() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static String currentFormattedTimestamp() {
         return LocalDateTime.now(ZONE_ROME).format(EUROPEAN_DATE_FORMATTER);

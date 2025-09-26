@@ -10,9 +10,14 @@ import java.util.List;
 
 public interface IBaseController<T, ID extends Serializable> {
     ResponseEntity<List<T>> get();
+
     ResponseEntity<T> getByID(ID id);
+
     ResponseEntity<List<T>> getAllPaged(int page, int size);
+
     ResponseEntity<T> post(@RequestBody T body);
+
     ResponseEntity<T> put(@PathVariable ID id, @RequestBody T body);
+
     ResponseEntity<Void> delete(@PathVariable ID id);
 }

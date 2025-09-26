@@ -3,12 +3,16 @@ package me.personal.myflix.entity.flix;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import me.personal.myflix.entity.base.BaseEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,7 +33,7 @@ public class Media extends BaseEntity<Long> implements Serializable {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name="media_type_id", foreignKey=@ForeignKey(name = "FK_media_TO_media_types"))
+    @JoinColumn(name = "media_type_id", foreignKey = @ForeignKey(name = "FK_media_TO_media_types"))
     private MediaType mediaType;
 
     @OneToMany(mappedBy = "media", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

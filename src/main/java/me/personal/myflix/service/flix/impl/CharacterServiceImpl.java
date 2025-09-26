@@ -1,8 +1,8 @@
 package me.personal.myflix.service.flix.impl;
 
 import me.personal.myflix.entity.flix.Character;
-import me.personal.myflix.repository.flix.CharacterRepository;
 import me.personal.myflix.repository.base.BaseRepository;
+import me.personal.myflix.repository.flix.CharacterRepository;
 import me.personal.myflix.service.base.impl.BaseServiceImpl;
 import me.personal.myflix.service.flix.CharacterService;
 import org.springframework.stereotype.Service;

@@ -2,8 +2,8 @@ package me.personal.myflix.controller.flix;
 
 import me.personal.myflix.controller.base.BaseController;
 import me.personal.myflix.entity.flix.Media;
-import me.personal.myflix.service.flix.MediaService;
 import me.personal.myflix.service.base.BaseService;
+import me.personal.myflix.service.flix.MediaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

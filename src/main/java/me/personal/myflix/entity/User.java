@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import me.personal.myflix.entity.base.BaseEntity;
 import org.hibernate.annotations.NaturalId;
 
-
 import java.io.Serial;
 import java.io.Serializable;
 

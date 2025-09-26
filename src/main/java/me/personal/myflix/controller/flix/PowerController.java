@@ -2,9 +2,11 @@ package me.personal.myflix.controller.flix;
 
 import me.personal.myflix.controller.base.BaseController;
 import me.personal.myflix.entity.flix.Power;
-import me.personal.myflix.service.flix.PowerService;
 import me.personal.myflix.service.base.BaseService;
-import org.springframework.web.bind.annotation.*;
+import me.personal.myflix.service.flix.PowerService;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController

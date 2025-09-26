@@ -1,14 +1,13 @@
 package me.personal.myflix.entity.flix;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import me.personal.myflix.entity.base.BaseEntity;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serial;
 import java.io.Serializable;

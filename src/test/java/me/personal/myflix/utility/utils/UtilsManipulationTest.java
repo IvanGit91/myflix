@@ -5,7 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class UtilsManipulationTest {
 
@@ -35,9 +36,9 @@ class UtilsManipulationTest {
 
     @ParameterizedTest
     @CsvSource({
-        "/237373/257701/257702/257801/, /, 2, false, 257701",
-        "one:two:three:four, :, 2, false, three",
-        "a.b.c.d, . , 3, false, d"
+            "/237373/257701/257702/257801/, /, 2, false, 257701",
+            "one:two:three:four, :, 2, false, three",
+            "a.b.c.d, . , 3, false, d"
     })
     void parseElement_WithValidInput_ReturnsExpectedElement(
             String target, String separator, int occurrence, boolean toEnd, String expected) {
@@ -47,9 +48,9 @@ class UtilsManipulationTest {
 
     @ParameterizedTest
     @CsvSource({
-        "one:two:three, :, 2, false, onetwo",
-        "a.b.c.d, \\. , 3, false, abc",
-        "1-2-3-4, -, 2, true, 1-2"
+            "one:two:three, :, 2, false, onetwo",
+            "a.b.c.d, \\. , 3, false, abc",
+            "1-2-3-4, -, 2, true, 1-2"
     })
     void splitUntil_WithValidInput_ReturnsExpectedString(
             String target, String separator, int occurrence, boolean includeSeparator, String expected) {
@@ -99,9 +100,9 @@ class UtilsManipulationTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
-        "hello world",
-        "hElLo WoRlD",
-        "HELLO WORLD"
+            "hello world",
+            "hElLo WoRlD",
+            "HELLO WORLD"
     })
     void capitalizeFirstLetterInAllWordsInAString_WithDifferentCases_ReturnsProperlyCapitalized(String input) {
         String result = UtilsManipulation.capitalizeFirstLetterInAllWordsInAString(input);

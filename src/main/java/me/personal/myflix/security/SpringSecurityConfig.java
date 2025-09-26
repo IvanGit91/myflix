@@ -1,7 +1,7 @@
 package me.personal.myflix.security;
 
-import me.personal.myflix.security.jwt.JwtFilter;
 import me.personal.myflix.security.jwt.JwtEntryPoint;
+import me.personal.myflix.security.jwt.JwtFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -16,34 +16,34 @@ import java.util.Locale;
 @EnableScheduling
 public abstract class BaseWebConfiguration {
 
-	@Bean
-	public CommonsRequestLoggingFilter requestLoggingFilter() {
-		CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
-		loggingFilter.setIncludeClientInfo(true);
-		loggingFilter.setIncludeQueryString(true);
-		loggingFilter.setIncludePayload(true);
-		return loggingFilter;
-	}
+    @Bean
+    public CommonsRequestLoggingFilter requestLoggingFilter() {
+        CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
+        loggingFilter.setIncludeClientInfo(true);
+        loggingFilter.setIncludeQueryString(true);
+        loggingFilter.setIncludePayload(true);
+        return loggingFilter;
+    }
 
-	@Bean
-	public Formatter<LocalDate> localDateFormatter() {
-		return new Formatter<>() {
-			@Override
-			public LocalDate parse(String text, Locale locale) throws ParseException {
-				return LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-			}
+    @Bean
+    public Formatter<LocalDate> localDateFormatter() {
+        return new Formatter<>() {
+            @Override
+            public LocalDate parse(String text, Locale locale) throws ParseException {
+                return LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            }
 
-			@Override
-			public String print(LocalDate object, Locale locale) {
-				return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(object);
-			}
-		};
-	}
+            @Override
+            public String print(LocalDate object, Locale locale) {
+                return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(object);
+            }
+        };
+    }
 
-	@Bean
-	public EnumExposedService getEnumExposedService() {
+    @Bean
+    public EnumExposedService getEnumExposedService() {
         EnumExposedService service = new EnumExposedService();
         service.init();
-		return service;
-	}
+        return service;
+    }
 }

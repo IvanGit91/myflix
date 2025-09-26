@@ -14,14 +14,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
 @Import({BaseMainConfiguration.class, BaseI18nConfiguration.class, BaseWebConfiguration.class})
 public class MyFlixApplication {
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     public static void main(String[] args) {
         ApplicationContextProvider.setStartupViaMain(true);
         SpringApplication.run(MyFlixApplication.class, args);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
 

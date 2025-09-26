@@ -2,13 +2,12 @@ package me.personal.myflix.entity.flix;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import me.personal.myflix.entity.base.BaseEntity;
-
-import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -37,7 +36,7 @@ public class Mission extends BaseEntity<Long> implements Serializable {
     private String outcome;
 
     @ManyToOne
-    @JoinColumn(name="objective_id", foreignKey=@ForeignKey(name = "FK_missions_TO_objectives"))
+    @JoinColumn(name = "objective_id", foreignKey = @ForeignKey(name = "FK_missions_TO_objectives"))
     @JsonIgnore
     private Objective objective;
 }

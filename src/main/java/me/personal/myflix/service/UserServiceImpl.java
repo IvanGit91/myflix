@@ -2,8 +2,8 @@ package me.personal.myflix.service;
 
 import me.personal.myflix.entity.User;
 import me.personal.myflix.exception.AppException;
-import me.personal.myflix.repository.base.BaseRepository;
 import me.personal.myflix.repository.UserRepository;
+import me.personal.myflix.repository.base.BaseRepository;
 import me.personal.myflix.service.base.impl.BaseServiceImpl;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.HttpStatus;

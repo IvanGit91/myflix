@@ -8,5 +8,6 @@ import java.util.Collection;
 
 public interface UserRepository extends BaseRepository<User, Long> {
     User findByEmail(String email);
+
     Collection<User> findAllByRole(String role);
 }

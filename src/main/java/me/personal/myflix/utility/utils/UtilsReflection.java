@@ -1,16 +1,16 @@
 package me.personal.myflix.utility.utils;
 
-import lombok.SneakyThrows;
-import lombok.extern.java.Log;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
-
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.SneakyThrows;
+import lombok.extern.java.Log;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
+
 import java.beans.FeatureDescriptor;
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
@@ -30,22 +30,22 @@ public class UtilsReflection {
     }
 
     @SneakyThrows
-    public static Object callGetter(Object obj, String fieldName){
+    public static Object callGetter(Object obj, String fieldName) {
         PropertyDescriptor pd = new PropertyDescriptor(fieldName, obj.getClass());
         return pd.getReadMethod().invoke(obj);
     }
 
     @SneakyThrows
-    public static Object callGetterSuperclass(Object obj, String fieldName){
+    public static Object callGetterSuperclass(Object obj, String fieldName) {
         return obj.getClass().getSuperclass().getMethod("get" + UtilsManipulation.capitalize(fieldName)).invoke(obj);
     }
 
-    public static <T,E> void callGetterList(E v, String listName) {
+    public static <T, E> void callGetterList(E v, String listName) {
         List<T> pro = (List<T>) UtilsReflection.callGetter(v, listName);
     }
 
     @SneakyThrows
-    public static void callSetter(Object obj, String fieldName, Object value){
+    public static void callSetter(Object obj, String fieldName, Object value) {
         PropertyDescriptor pd = new PropertyDescriptor(fieldName, obj.getClass());
         pd.getWriteMethod().invoke(obj, value);
     }
@@ -54,17 +54,19 @@ public class UtilsReflection {
         try {
             Method method = classe.getMethod(nomeMetodo);
             method.invoke(null);
-        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException |
+                 InvocationTargetException e) {
             e.printStackTrace();
         }
     }
 
-    public static <T,X> void callMethod(Class<T> classe, String nomeMetodo, X param) {
+    public static <T, X> void callMethod(Class<T> classe, String nomeMetodo, X param) {
         try {
             param = UtilsHibernate.unProxy(param);
             Method method = classe.getMethod(nomeMetodo, Object.class);
             method.invoke(classe.getDeclaredConstructor().newInstance(), param);
-        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException e) {
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException |
+                 InvocationTargetException | InstantiationException e) {
             e.printStackTrace();
         }
     }
@@ -74,7 +76,8 @@ public class UtilsReflection {
             Method method = classe.getMethod(nomeMetodo, String.class);
             Object o = method.invoke(null, param);
             log.info("Method " + nomeMetodo + " called with parameter " + param + " and returned " + o);
-        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException |
+                 InvocationTargetException e) {
             e.printStackTrace();
         }
     }
@@ -164,8 +167,7 @@ public class UtilsReflection {
                     boolean res = false;
                     Object obj = wrappedSource.getPropertyValue(propertyName);
                     if (obj != null) {
-                        if (obj instanceof List) {
-                            List<?> list = (List<?>) obj;
+                        if (obj instanceof List<?> list) {
                             res = list.isEmpty();
                             //res = true; // TODO - for the moment, I exclude the list to avoid the following error: "org.hibernate.PersistentObjectException: detached entity passed to persist"
                         }
@@ -194,7 +196,7 @@ public class UtilsReflection {
                 .toList();
     }
 
-    public static Map<String, Object> getClassNotNullMethods(Object entity, boolean superclass, String...filters) {
+    public static Map<String, Object> getClassNotNullMethods(Object entity, boolean superclass, String... filters) {
         Map<String, Object> methods = new HashMap<>();
         Class<?> clazz = entity.getClass();
         while (clazz != null) {
@@ -212,27 +214,31 @@ public class UtilsReflection {
         return methods;
     }
 
-    public static Optional<Field> getFirstAnnotatedField(Class<?> clazz, Class annotationClass){
+    public static Optional<Field> getFirstAnnotatedField(Class<?> clazz, Class annotationClass) {
         return Arrays.stream(clazz.getDeclaredFields()).filter(f -> f.getDeclaredAnnotationsByType(annotationClass).length > 0).findFirst();
     }
-    public static List<Field> getAnnotatedFields(Class<?> clazz, Class annotationClass){
+
+    public static List<Field> getAnnotatedFields(Class<?> clazz, Class annotationClass) {
         return Arrays.stream(clazz.getDeclaredFields()).filter(f -> f.getDeclaredAnnotationsByType(annotationClass).length > 0).collect(Collectors.toList());
     }
-    public static List<Field> getAnnotatedFields(Class<?> clazz, List<Class> annotationClass){
+
+    public static List<Field> getAnnotatedFields(Class<?> clazz, List<Class> annotationClass) {
         return Arrays.stream(clazz.getDeclaredFields()).filter(f -> annotationClass.stream().anyMatch(a -> f.getDeclaredAnnotationsByType(a).length > 0)).collect(Collectors.toList());
     }
-    public static List<Field> getNotEmptyNotNull(Class<?> clazz){
+
+    public static List<Field> getNotEmptyNotNull(Class<?> clazz) {
         return Arrays.stream(clazz.getDeclaredFields())
                 .filter(f -> (f.getDeclaredAnnotationsByType(NotNull.class).length > 0 || f.getDeclaredAnnotationsByType(NotEmpty.class).length > 0))
                 .toList();
     }
-    public static <T> Boolean checkInvalidElements(T entity){
+
+    public static <T> Boolean checkInvalidElements(T entity) {
         return Arrays.stream(entity.getClass().getDeclaredFields())
                 .filter(f -> (f.getDeclaredAnnotationsByType(NotNull.class).length > 0 || f.getDeclaredAnnotationsByType(NotEmpty.class).length > 0))
                 .anyMatch(f -> callGetter(entity, f.getName()) == null);
     }
 
-    public static <T> String findAndGetIdFieldName(T entity){
+    public static <T> String findAndGetIdFieldName(T entity) {
         String fieldName = null;
         Optional<Field> field = UtilsReflection.getFirstAnnotatedField(entity.getClass(), Id.class);
         if (field.isPresent()) {
@@ -241,7 +247,7 @@ public class UtilsReflection {
         return fieldName;
     }
 
-    public static <T, ID extends Serializable> ID findAndGetId(T entity){
+    public static <T, ID extends Serializable> ID findAndGetId(T entity) {
         ID id = null;
         Optional<Field> field = UtilsReflection.getFirstAnnotatedField(entity.getClass(), Id.class);
         if (field.isPresent()) {
@@ -250,7 +256,7 @@ public class UtilsReflection {
         return id;
     }
 
-    public static List<Field> equalsTargetClassFields(Class<?> clazz, Class<?> targetClass){
+    public static List<Field> equalsTargetClassFields(Class<?> clazz, Class<?> targetClass) {
         return Arrays.stream(clazz.getDeclaredFields()).filter(f -> {
             Class<?> classToCheck = f.getType();
             if (f.getType().isAssignableFrom(List.class) || f.getType().isAssignableFrom(Set.class)) {
@@ -261,7 +267,7 @@ public class UtilsReflection {
         }).collect(Collectors.toList());
     }
 
-    public static List<Field> equalsTargetClassFieldMappedBy(Class<?> clazz, String fieldName){
+    public static List<Field> equalsTargetClassFieldMappedBy(Class<?> clazz, String fieldName) {
         return Arrays.stream(clazz.getDeclaredFields()).filter(f -> {
             OneToOne oneToOne = f.getAnnotation(OneToOne.class);
             OneToMany oneToMany = f.getAnnotation(OneToMany.class);
@@ -272,7 +278,7 @@ public class UtilsReflection {
     }
 
     @SneakyThrows
-    public static <T> T callDefaultConstructor(Class<?> clazz){
+    public static <T> T callDefaultConstructor(Class<?> clazz) {
         Constructor<?> costrCity = clazz.getConstructor();
         return (T) costrCity.newInstance();
     }

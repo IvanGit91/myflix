@@ -1,7 +1,7 @@
 package me.personal.myflix.payload.request;
 
-import lombok.Data;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
 @Data
 public class LoginForm {

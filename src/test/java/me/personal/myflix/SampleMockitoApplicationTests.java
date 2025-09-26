@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @SpringBootTest(classes = MyFlixApplication.class)
-@ActiveProfiles({ "dev", "integration_test" })
+@ActiveProfiles({"dev", "integration_test"})
 @WebAppConfiguration
 class SampleMockitoApplicationTests {
 

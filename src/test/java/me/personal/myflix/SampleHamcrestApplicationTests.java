@@ -17,6 +17,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.core.Is.isA;
@@ -24,7 +26,7 @@ import static org.hamcrest.core.IsIterableContaining.hasItem;
 
 
 @SpringBootTest(classes = MyFlixApplication.class)
-@ActiveProfiles({ "dev", "integration_test" })
+@ActiveProfiles({"dev", "integration_test"})
 @WebAppConfiguration
 @Log4j2
 @Tag("Development")

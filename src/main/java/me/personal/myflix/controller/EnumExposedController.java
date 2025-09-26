@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class EnumExposedController {
 
-	@Autowired
-	private EnumExposedService service;
+    @Autowired
+    private EnumExposedService service;
 
-	@GetMapping("/enum/{enumName}")
-	public EnumExposedResult getEnum(@PathVariable("enumName") String enumName) {
-		return this.service.getEnumExposedResult(enumName);
-	}
+    @GetMapping("/enum/{enumName}")
+    public EnumExposedResult getEnum(@PathVariable("enumName") String enumName) {
+        return this.service.getEnumExposedResult(enumName);
+    }
 }

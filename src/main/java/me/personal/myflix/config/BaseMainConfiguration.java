@@ -9,19 +9,19 @@ import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 @Configuration
 public class BaseMainConfiguration {
 
-	@Bean
-	public ApplicationContextProvider contextProvider() {
-		return new ApplicationContextProvider();
-	}
+    @Bean
+    public ApplicationContextProvider contextProvider() {
+        return new ApplicationContextProvider();
+    }
 
-	// Solve the lazy loading problem
+    // Solve the lazy loading problem
     // TODO - to remove, can lead to the n+1 query problem
-	@Bean
-	public FilterRegistrationBean<OpenEntityManagerInViewFilter> registerOpenEntityManagerInViewFilterBean() {
-		FilterRegistrationBean<OpenEntityManagerInViewFilter> registrationBean = new FilterRegistrationBean<>();
-		OpenEntityManagerInViewFilter filter = new OpenEntityManagerInViewFilter();
-		registrationBean.setFilter(filter);
-		registrationBean.setOrder(5);
-		return registrationBean;
-	}
+    @Bean
+    public FilterRegistrationBean<OpenEntityManagerInViewFilter> registerOpenEntityManagerInViewFilterBean() {
+        FilterRegistrationBean<OpenEntityManagerInViewFilter> registrationBean = new FilterRegistrationBean<>();
+        OpenEntityManagerInViewFilter filter = new OpenEntityManagerInViewFilter();
+        registrationBean.setFilter(filter);
+        registrationBean.setOrder(5);
+        return registrationBean;
+    }
 }

@@ -4,5 +4,5 @@ import java.util.Locale;
 import java.util.Optional;
 
 public interface ICurrentLocaleResolver {
-	Optional<Locale> getCurrentLocale();
+    Optional<Locale> getCurrentLocale();
 }

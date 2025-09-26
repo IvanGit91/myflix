@@ -12,11 +12,12 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assumptions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 
 @SpringBootTest(classes = MyFlixApplication.class)
-@ActiveProfiles({ "dev", "integration_test" })
+@ActiveProfiles({"dev", "integration_test"})
 @WebAppConfiguration
 @TestPropertySource(properties = "init.enabled=false")
 @Log4j2
@@ -26,6 +27,11 @@ class SampleApplicationTests {
     @BeforeAll
     static void setup() {
         log.info("@BeforeAll - executes once before all test methods in this class");
+    }
+
+    @AfterAll
+    static void done() {
+        log.info("@AfterAll - executed after all test methods.");
     }
 
     @BeforeEach
@@ -49,11 +55,6 @@ class SampleApplicationTests {
         log.info("@AfterEach - executed after each test method.");
     }
 
-    @AfterAll
-    static void done() {
-        log.info("@AfterAll - executed after all test methods.");
-    }
-
     /* ASSERTIONS  */
     @Test
     void lambdaExpressions() {
@@ -74,8 +75,8 @@ class SampleApplicationTests {
     }
 
     /* ASSUMPTIONS
-    *  Assumptions are used to run tests only if certain conditions are met.
-    *  This is typically used for external conditions that are required for the test to run properly, but which are not directly related to whatever is being tested. */
+     *  Assumptions are used to run tests only if certain conditions are met.
+     *  This is typically used for external conditions that are required for the test to run properly, but which are not directly related to whatever is being tested. */
     @Test
     void trueAssumption() {
         assumeTrue(5 > 1);
@@ -117,7 +118,7 @@ class SampleApplicationTests {
     /* DYNAMIC TESTS */
     @TestFactory
     Stream<DynamicTest> translateDynamicTestsFromStream() {
-        List<String> in = List.of("uno", "due", "tre"), out = List.of("uno" , "due", "tre");
+        List<String> in = List.of("uno", "due", "tre"), out = List.of("uno", "due", "tre");
         return in.stream()
                 .map(word ->
                         DynamicTest.dynamicTest("Test translate " + word, () -> {

@@ -17,6 +17,7 @@ public class UtilsManipulation {
     public static String match(String text, String patternString) {
         return match(text, patternString, null);
     }
+
     public static String match(String text, String patternString, Integer retGroup) {
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(text);
@@ -26,18 +27,18 @@ public class UtilsManipulation {
 
     // ------------ FORMAT ------------
     // Es: format("hi I'm {0} {1}", "john", "doe")
-    public static String format(String str, Object...positionalString) {
+    public static String format(String str, Object... positionalString) {
         return MessageFormat.format(str, positionalString);
     }
 
     // ------------ STRING ------------
     // Es /237373/257701/257702/257801/
     // Es: To take 257701, do a similar call: parseElement(target, "/", 2, false)
-    public static String parseElement(String target, String separator, int nOccurrence, boolean toEndOfString){
+    public static String parseElement(String target, String separator, int nOccurrence, boolean toEndOfString) {
         log.info("Target: " + target);
         String tempValue;
         int begin = 0, index = 0, counter = 0;
-        while((index = target.indexOf(separator, index)) != -1 && counter < nOccurrence){
+        while ((index = target.indexOf(separator, index)) != -1 && counter < nOccurrence) {
             index++;
             counter++;
             begin = index;
@@ -50,13 +51,13 @@ public class UtilsManipulation {
         return tempValue;
     }
 
-    public static String splitUntil(String target, String separator, int nOccurrence, boolean includeSeparator){
+    public static String splitUntil(String target, String separator, int nOccurrence, boolean includeSeparator) {
         String result = "";
         String[] split = target.split(separator);
         int until = Math.min(nOccurrence, split.length);
         for (int i = 0; i < until; i++) {
             result += split[i];
-            result = includeSeparator && (i+1) < until ? result + unescapeJava(separator) : result;
+            result = includeSeparator && (i + 1) < until ? result + unescapeJava(separator) : result;
         }
         return result;
     }
@@ -98,8 +99,8 @@ public class UtilsManipulation {
     }
 
     public static int findMax(String[] s) {
-        int index = 0, max=0;
-        for (int i = 0; i<s.length; i++) {
+        int index = 0, max = 0;
+        for (int i = 0; i < s.length; i++) {
             if (max < s[i].length()) {
                 max = s[i].length();
                 index = i;
@@ -119,8 +120,7 @@ public class UtilsManipulation {
      */
     public static String capitalizeFirstLetterInAllWordsInAString(String s) {
         String[] splitted = s.split(" ");
-        for(int k = 0; k<splitted.length; k++)
-        {
+        for (int k = 0; k < splitted.length; k++) {
             splitted[k] = splitted[k].substring(0, 1).toUpperCase() + splitted[k].substring(1).toLowerCase();
         }
 
@@ -129,10 +129,10 @@ public class UtilsManipulation {
 
     public static String filenameFromPath(String path) {
         int pos = path.lastIndexOf("\\");
-        return path.substring(pos+1);
+        return path.substring(pos + 1);
     }
 
-    public static String replaceAllLR(String target){
+    public static String replaceAllLR(String target) {
         return target.replaceAll("[$&+,:;=?@#|'<>.^*()%!//\\\"-]", "_").trim();
     }
 
